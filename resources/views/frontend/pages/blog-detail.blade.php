@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="image">
-                                    <img src="{{$post->photo}}" alt="{{$post->photo}}">
+                                    <img src="{{$post->photo}}" alt="{{$post->title}}" class="img-fluid w-100" style="max-height: 500px; object-fit: cover;">
                                 </div>
                                 <div class="blog-detail">
                                     <h2 class="blog-title">{{$post->title}}</h2>
@@ -71,18 +71,6 @@
                                         <form class="form comment_form" id="commentForm" action="{{route('post-comment.store',$post->slug)}}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                {{-- <div class="col-lg-6 col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label>Your Name<span>*</span></label>
-                                                        <input type="text" name="name" placeholder="" required="required">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label>Your Email<span>*</span></label>
-                                                        <input type="email" name="email" placeholder="" required="required">
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-12">
                                                     <div class="form-group  comment_form_body">
                                                         <label>Your Message<span>*</span></label>
@@ -106,11 +94,7 @@
                             @else
                             <p class="text-center p-5">
                                 You need to <a href="{{route('login.form')}}" style="color:rgb(54, 54, 204)">Login</a> OR <a style="color:blue" href="{{route('register.form')}}">Register</a> for comment.
-
                             </p>
-
-
-                            <!--/ End Form -->
                             @endauth
                             <div class="col-12">
                                 <div class="comments">
@@ -137,7 +121,6 @@
                         <div class="single-widget category">
                             <h3 class="title">Blog Categories</h3>
                             <ul class="categor-list">
-                                {{-- {{count(Helper::postCategoryList())}} --}}
                                 @foreach(Helper::postCategoryList('posts') as $cat)
                                 <li><a href="#">{{$cat->title}} </a></li>
                                 @endforeach
@@ -151,7 +134,7 @@
                                 <!-- Single Post -->
                                 <div class="single-post">
                                     <div class="image">
-                                        <img src="{{$post->photo}}" alt="{{$post->photo}}">
+                                        <img src="{{$post->photo}}" alt="{{$post->title}}" class="img-fluid" style="height: 80px; width: 80px; object-fit: cover;">
                                     </div>
                                     <div class="content">
                                         <h5><a href="#">{{$post->title}}</a></h5>
@@ -166,8 +149,6 @@
                                 <!-- End Single Post -->
                             @endforeach
                         </div>
-                        <!--/ End Single Widget -->
-                        <!-- Single Widget -->
                         <!--/ End Single Widget -->
                         <!-- Single Widget -->
                         <div class="single-widget side-tags">
@@ -201,13 +182,34 @@
     </section>
     <!--/ End Blog Single -->
 @endsection
+
 @push('styles')
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
+<style>
+    /* Image styling */
+    .blog-single-main .image img {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+    /* Recent post images */
+    .single-post .image img {
+        border-radius: 4px;
+    }
+
+    /* Responsive images */
+    @media (max-width: 768px) {
+        .blog-single-main .image img {
+            max-height: 300px;
+        }
+    }
+</style>
 @endpush
+
 @push('scripts')
 <script>
 $(document).ready(function(){
-
     (function($) {
         "use strict";
 
@@ -227,7 +229,7 @@ $(document).ready(function(){
             $( html).find('#parent_id').val(parent_id);
             $('#commentFormContainer').hide();
             $(this).parents('.comment-list').append(html).fadeIn('slow').addClass('appended');
-          });
+        });
 
         $('.comment-list').on('click','.btn-reply.cancel',function(e){
             e.preventDefault();
@@ -244,7 +246,7 @@ $(document).ready(function(){
             $('#commentFormContainer').append(html);
         });
 
- })(jQuery)
+    })(jQuery)
 })
 </script>
 @endpush

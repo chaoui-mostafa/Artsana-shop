@@ -9,10 +9,11 @@
 						<!-- Single Widget -->
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img src="{{asset('backend/img/logo2.png')}}" alt="#"></a>
-							</div>
-							@php
-								$settings=DB::table('settings')->get();
+                                <!-- <a href="index.html"><img src="{{asset('backend/img/logo2.png')}}" alt="#"></a> -->
+                                <a href="{{route('home')}}" style="font-size: 40px;">
+                                    <span style="color: orange; font-weight: bold;">Artisant </span>Shop
+                                </a>  </div>		@php
+$settings = DB::table('settings')->get();
 							@endphp
 							<p class="text">@foreach($settings as $data) {{$data->short_des}} @endforeach</p>
 							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span></p>
@@ -74,7 +75,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="left">
-								<p>Copyright © {{date('Y')}} <a href="https://github.com/Prajwal100" target="_blank">Prajwal Rai</a>  -  All Rights Reserved.</p>
+								<p>Copyright © {{date('Y')}} <a href="https://github.com/chaoui-mostafa" target="_blank">Artisant Shop</a>  -  All Rights Reserved.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">
@@ -88,7 +89,7 @@
 		</div>
 	</footer>
 	<!-- /End Footer Area -->
- 
+
 	<!-- Jquery -->
     <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
     <script src="{{asset('frontend/js/jquery-migrate-3.0.0.js')}}"></script>
@@ -125,7 +126,7 @@
 	<!-- Active JS -->
 	<script src="{{asset('frontend/js/active.js')}}"></script>
 
-	
+
 	@stack('scripts')
 	<script>
 		setTimeout(function(){
